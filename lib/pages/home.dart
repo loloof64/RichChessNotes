@@ -16,10 +16,13 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () => _goToNoteEditorPage(context),
-        child: Text("Go to editor page"),
+    return Scaffold(
+      appBar: AppBar(title: Text("Home")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => _goToNoteEditorPage(context),
+          child: Text("Go to editor page"),
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ class HomeWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (routeContext) {
-          return NoteEditorWidget();
+          return NoteEditorPage();
         },
       ),
     );

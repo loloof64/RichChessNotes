@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:rich_chess_notes/widgets/note_editor.dart';
 
-class NoteEditorWidget extends StatefulWidget {
-  const NoteEditorWidget({super.key});
+class NoteEditorPage extends StatefulWidget {
+  const NoteEditorPage({super.key});
 
   @override
-  State<NoteEditorWidget> createState() => _NoteEditorWidgetState();
+  State<NoteEditorPage> createState() => _NoteEditorPageState();
 }
 
-class _NoteEditorWidgetState extends State<NoteEditorWidget> {
+class _NoteEditorPageState extends State<NoteEditorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Editing note")),
-      body: Placeholder(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: NoteEditorWidget(),
+      ),
     );
   }
 }

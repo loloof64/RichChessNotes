@@ -39,6 +39,20 @@ highlights:
 Après l'échiquier.
 ''';
 
+  static const _chessTemplate = ''':::chess
+fen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+orientation: white
+lastMove: no
+
+arrows:
+  - e2e4: yellow
+  - c7c5: blue
+
+highlights:
+  - e4: red
+  - c5: green
+:::''';
+
   late final TextEditingController _textController;
   late String _previewData;
   Timer? _debounceTimer;
@@ -60,6 +74,31 @@ Après l'échiquier.
     });
   }
 
+  void _insertChessTemplate() {
+    final text = _textController.text;
+    final selection = _textController.selection;
+
+    if (!selection.isValid) {
+      final newText = '$_chessTemplate\n\n$text';
+      _textController.value = TextEditingValue(
+        text: newText,
+        selection: TextSelection.collapsed(offset: _chessTemplate.length + 2),
+      );
+      return;
+    }
+
+    final insertion = '\n$_chessTemplate\n';
+    final start = selection.start;
+    final end = selection.end;
+
+    final newText = text.replaceRange(start, end, insertion);
+
+    _textController.value = TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: start + insertion.length),
+    );
+  }
+
   @override
   void dispose() {
     _debounceTimer?.cancel();
@@ -71,7 +110,16 @@ Après l'échiquier.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Editing note')),
+      appBar: AppBar(
+        title: const Text('Editing note'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.grid_on),
+            tooltip: 'Insérer un échiquier',
+            onPressed: _insertChessTemplate,
+          ),
+        ],
+      ),
 
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,

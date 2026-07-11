@@ -74,6 +74,39 @@ highlights:
     });
   }
 
+  void _updateFenInSource(
+    String blockContent,
+    String newFen,
+    bool whiteAtBottom,
+  ) {
+    final fullText = _textController.text;
+    final idx = fullText.indexOf(blockContent);
+    if (idx == -1) return;
+
+    final fenLineRegex = RegExp(r'fen:.*');
+    final orientationLineRegex = RegExp(r'orientation:.*');
+
+    var newBlockContent = blockContent.replaceFirst(
+      fenLineRegex,
+      'fen: $newFen',
+    );
+    newBlockContent = newBlockContent.replaceFirst(
+      orientationLineRegex,
+      'orientation: ${whiteAtBottom ? 'white' : 'black'}',
+    );
+
+    final newFullText = fullText.replaceRange(
+      idx,
+      idx + blockContent.length,
+      newBlockContent,
+    );
+
+    setState(() {
+      _textController.text = newFullText;
+      _previewData = newFullText;
+    });
+  }
+
   void _insertChessTemplate() {
     final text = _textController.text;
     final selection = _textController.selection;
@@ -153,7 +186,9 @@ highlights:
                   ChessBlockSyntax(),
                 ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
 
-                builders: {'chess': ChessBuilder()},
+                builders: {
+                  'chess': ChessBuilder(onFenEdited: _updateFenInSource),
+                },
               ),
             ),
           ),

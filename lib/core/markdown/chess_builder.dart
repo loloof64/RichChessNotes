@@ -63,6 +63,15 @@ class ChessBuilder extends MarkdownElementBuilder {
         return previousRes;
       });
 
+      final lastMove = chess.lastMove;
+      final lastMoveArrow = (lastMove != null && lastMove.length == 4)
+          ? BoardArrow(
+              from: lastMove.substring(0, 2),
+              to: lastMove.substring(2, 4),
+              color: Colors.transparent,
+            )
+          : null;
+
       return Center(
         child: SizedBox(
           width: 300.0,
@@ -89,7 +98,9 @@ class ChessBuilder extends MarkdownElementBuilder {
 
             engineThinking: false,
 
-            highlightLastMoveSquares: true,
+            highlightLastMoveSquares: false,
+
+            lastMoveToHighlight: lastMoveArrow,
 
             playSounds: false,
 

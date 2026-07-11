@@ -89,7 +89,7 @@ class ChessBuilder extends MarkdownElementBuilder {
 
             engineThinking: false,
 
-            highlightLastMoveSquares: false,
+            highlightLastMoveSquares: true,
 
             playSounds: false,
 

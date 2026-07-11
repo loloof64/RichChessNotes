@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -13,7 +15,9 @@ class NoteEditorPage extends StatefulWidget {
 }
 
 class _NoteEditorPageState extends State<NoteEditorPage> {
-  final markdownData = '''
+  static const _debounceDuration = Duration(milliseconds: 500);
+
+  static const _initialMarkdown = '''
 ### Simple title
 
 Avant l'échiquier
@@ -35,24 +39,77 @@ highlights:
 Après l'échiquier.
 ''';
 
+  late final TextEditingController _textController;
+  late String _previewData;
+  Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _initialMarkdown);
+    _previewData = _initialMarkdown;
+    _textController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(_debounceDuration, () {
+      setState(() {
+        _previewData = _textController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    _textController.removeListener(_onTextChanged);
+    _textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Editing note')),
 
-      body: Padding(
-        padding: const EdgeInsets.all(8),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextField(
+                controller: _textController,
+                maxLines: null,
+                expands: true,
+                textAlignVertical: TextAlignVertical.top,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Écrivez votre note en markdown...',
+                ),
+              ),
+            ),
+          ),
 
-        child: MarkdownBody(
-          data: markdownData,
+          const VerticalDivider(width: 1),
 
-          extensionSet: md.ExtensionSet([
-            ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-            ChessBlockSyntax(),
-          ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(8),
+              child: MarkdownBody(
+                data: _previewData,
 
-          builders: {'chess': ChessBuilder()},
-        ),
+                extensionSet: md.ExtensionSet([
+                  ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                  ChessBlockSyntax(),
+                ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
+
+                builders: {'chess': ChessBuilder()},
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

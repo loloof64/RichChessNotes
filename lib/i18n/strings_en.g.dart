@@ -40,8 +40,27 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
+	late final Translations$options$en options = Translations$options$en._(_root);
 	late final Translations$pages$en pages = Translations$pages$en._(_root);
 	late final Translations$misc$en misc = Translations$misc$en._(_root);
+}
+
+// Path: options
+class Translations$options$en {
+	Translations$options$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Options'
+	String get title => 'Options';
+
+	/// en: 'Dark mode'
+	String get dark_mode_label => 'Dark mode';
+
+	late final Translations$options$snack_messages$en snack_messages = Translations$options$snack_messages$en._(_root);
+	late final Translations$options$dropbox$en dropbox = Translations$options$dropbox$en._(_root);
 }
 
 // Path: pages
@@ -67,6 +86,43 @@ class Translations$misc$en {
 
 	/// en: 'Cancelled by user'
 	String get cancelled_by_user => 'Cancelled by user';
+}
+
+// Path: options.snack_messages
+class Translations$options$snack_messages$en {
+	Translations$options$snack_messages$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final Translations$options$snack_messages$dropbox$en dropbox = Translations$options$snack_messages$dropbox$en._(_root);
+}
+
+// Path: options.dropbox
+class Translations$options$dropbox$en {
+	Translations$options$dropbox$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Login Dropbox'
+	String get login_button => 'Login Dropbox';
+
+	/// en: 'Logout Dropbox'
+	String get logout_button => 'Logout Dropbox';
+
+	/// en: 'Sync files'
+	String get sync_button => 'Sync files';
+
+	/// en: 'Clear connection data'
+	String get reset_tokens => 'Clear connection data';
+
+	/// en: 'Dropbox data reset. Please login again.'
+	String get tokens_reseted => 'Dropbox data reset. Please login again.';
+
+	/// en: 'Failed to reset Dropbox data: $err'
+	String failed_reseting_tokens({required Object err}) => 'Failed to reset Dropbox data: ${err}';
 }
 
 // Path: pages.home
@@ -139,6 +195,33 @@ class Translations$misc$buttons$en {
 
 	/// en: 'Cancel'
 	String get cancel => 'Cancel';
+}
+
+// Path: options.snack_messages.dropbox
+class Translations$options$snack_messages$dropbox$en {
+	Translations$options$snack_messages$dropbox$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Logged in your Dropbox account.'
+	String get connection_success => 'Logged in your Dropbox account.';
+
+	/// en: 'Failed to log in your Dropbox account : please retry.'
+	String get connection_error => 'Failed to log in your Dropbox account : please retry.';
+
+	/// en: 'Logged out your Dropbox account.'
+	String get disconnection_success => 'Logged out your Dropbox account.';
+
+	/// en: 'Failed to log out your Dropbox account.'
+	String get disconnection_error => 'Failed to log out your Dropbox account.';
+
+	/// en: 'Files synchronized successfully.'
+	String get sync_success => 'Files synchronized successfully.';
+
+	/// en: 'File synchronization failed.'
+	String get sync_error => 'File synchronization failed.';
 }
 
 // Path: pages.home.misc
@@ -302,6 +385,20 @@ class Translations$pages$note_editor$save_content_dialog$en {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
+			'options.title' => 'Options',
+			'options.dark_mode_label' => 'Dark mode',
+			'options.snack_messages.dropbox.connection_success' => 'Logged in your Dropbox account.',
+			'options.snack_messages.dropbox.connection_error' => 'Failed to log in your Dropbox account : please retry.',
+			'options.snack_messages.dropbox.disconnection_success' => 'Logged out your Dropbox account.',
+			'options.snack_messages.dropbox.disconnection_error' => 'Failed to log out your Dropbox account.',
+			'options.snack_messages.dropbox.sync_success' => 'Files synchronized successfully.',
+			'options.snack_messages.dropbox.sync_error' => 'File synchronization failed.',
+			'options.dropbox.login_button' => 'Login Dropbox',
+			'options.dropbox.logout_button' => 'Logout Dropbox',
+			'options.dropbox.sync_button' => 'Sync files',
+			'options.dropbox.reset_tokens' => 'Clear connection data',
+			'options.dropbox.tokens_reseted' => 'Dropbox data reset. Please login again.',
+			'options.dropbox.failed_reseting_tokens' => ({required Object err}) => 'Failed to reset Dropbox data: ${err}',
 			'pages.home.title' => 'Home',
 			'pages.home.misc.base_directory' => '[APP_ROOT]',
 			'pages.home.misc.no_item' => 'No item',

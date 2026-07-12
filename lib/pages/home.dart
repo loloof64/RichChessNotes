@@ -9,6 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:rich_chess_notes/utils/filesystem.dart';
 import 'package:remix_icons_flutter/remixicon_ids.dart';
+import 'package:rich_chess_notes/widgets/common_drawer.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
@@ -573,6 +574,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
 
     return Scaffold(
+      drawer: CommonDrawer(),
       appBar: AppBar(
         title: Text(t.pages.home.title),
         actions: [

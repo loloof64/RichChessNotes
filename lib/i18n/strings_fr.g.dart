@@ -37,8 +37,22 @@ class TranslationsFr with BaseTranslations<AppLocale, Translations> implements T
 	TranslationsFr $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsFr(meta: meta ?? this.$meta);
 
 	// Translations
+	@override late final _Translations$options$fr options = _Translations$options$fr._(_root);
 	@override late final _Translations$pages$fr pages = _Translations$pages$fr._(_root);
 	@override late final _Translations$misc$fr misc = _Translations$misc$fr._(_root);
+}
+
+// Path: options
+class _Translations$options$fr implements Translations$options$en {
+	_Translations$options$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Options';
+	@override String get dark_mode_label => 'Dark mode';
+	@override late final _Translations$options$snack_messages$fr snack_messages = _Translations$options$snack_messages$fr._(_root);
+	@override late final _Translations$options$dropbox$fr dropbox = _Translations$options$dropbox$fr._(_root);
 }
 
 // Path: pages
@@ -62,6 +76,31 @@ class _Translations$misc$fr implements Translations$misc$en {
 	// Translations
 	@override late final _Translations$misc$buttons$fr buttons = _Translations$misc$buttons$fr._(_root);
 	@override String get cancelled_by_user => 'Annulé par l\'utilisateur';
+}
+
+// Path: options.snack_messages
+class _Translations$options$snack_messages$fr implements Translations$options$snack_messages$en {
+	_Translations$options$snack_messages$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$options$snack_messages$dropbox$fr dropbox = _Translations$options$snack_messages$dropbox$fr._(_root);
+}
+
+// Path: options.dropbox
+class _Translations$options$dropbox$fr implements Translations$options$dropbox$en {
+	_Translations$options$dropbox$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get login_button => 'Connexion Dropbox';
+	@override String get logout_button => 'Déconnexion Dropbox';
+	@override String get sync_button => 'Synchroniser les fichiers';
+	@override String get reset_tokens => 'Effacer données de connexion';
+	@override String get tokens_reseted => 'Données Dropbox effacées. Veuillez vous reconnecter.';
+	@override String failed_reseting_tokens({required Object err}) => 'Échec de la réinitialisation des données Dropbox : ${err}';
 }
 
 // Path: pages.home
@@ -116,6 +155,21 @@ class _Translations$misc$buttons$fr implements Translations$misc$buttons$en {
 	// Translations
 	@override String get ok => 'Ok';
 	@override String get cancel => 'Annuler';
+}
+
+// Path: options.snack_messages.dropbox
+class _Translations$options$snack_messages$dropbox$fr implements Translations$options$snack_messages$dropbox$en {
+	_Translations$options$snack_messages$dropbox$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get connection_success => 'Connecté à votre compte Dropbox.';
+	@override String get connection_error => 'Échec de connexion à votre compte Dropbox : veuillez réessayer.';
+	@override String get disconnection_success => 'Déconnecté de votre compte Dropbox.';
+	@override String get disconnection_error => 'Échec de déconnexion de votre compte Dropbox.';
+	@override String get sync_success => 'Fichiers synchronisés avec succès.';
+	@override String get sync_error => 'La synchronisation des fichiers a échoué.';
 }
 
 // Path: pages.home.misc
@@ -237,6 +291,20 @@ class _Translations$pages$note_editor$save_content_dialog$fr implements Translat
 extension on TranslationsFr {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
+			'options.title' => 'Options',
+			'options.dark_mode_label' => 'Dark mode',
+			'options.snack_messages.dropbox.connection_success' => 'Connecté à votre compte Dropbox.',
+			'options.snack_messages.dropbox.connection_error' => 'Échec de connexion à votre compte Dropbox : veuillez réessayer.',
+			'options.snack_messages.dropbox.disconnection_success' => 'Déconnecté de votre compte Dropbox.',
+			'options.snack_messages.dropbox.disconnection_error' => 'Échec de déconnexion de votre compte Dropbox.',
+			'options.snack_messages.dropbox.sync_success' => 'Fichiers synchronisés avec succès.',
+			'options.snack_messages.dropbox.sync_error' => 'La synchronisation des fichiers a échoué.',
+			'options.dropbox.login_button' => 'Connexion Dropbox',
+			'options.dropbox.logout_button' => 'Déconnexion Dropbox',
+			'options.dropbox.sync_button' => 'Synchroniser les fichiers',
+			'options.dropbox.reset_tokens' => 'Effacer données de connexion',
+			'options.dropbox.tokens_reseted' => 'Données Dropbox effacées. Veuillez vous reconnecter.',
+			'options.dropbox.failed_reseting_tokens' => ({required Object err}) => 'Échec de la réinitialisation des données Dropbox : ${err}',
 			'pages.home.title' => 'Accueil',
 			'pages.home.misc.base_directory' => '[RACINE_APP]',
 			'pages.home.misc.no_item' => 'Aucun élément',

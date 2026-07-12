@@ -9,11 +9,11 @@ final isDesktop =
 
 final redirectUri = isDesktop
     ? 'http://localhost:53682/oauth2redirect'
-    : 'https://chess-exercises-notes-website.vercel.app/oauth2redirect';
+    : 'https://rich-chess-notes-website.vercel.app/oauth2redirect';
 
 final callbackUrlScheme = isDesktop
     ? 'http://localhost:53682'
-    : 'chess-exercises-notes';
+    : 'rich-chess-notes';
 
 /// OAuth2 client configuration for Dropbox, handling desktop and mobile/web.
 class DropboxOAuth2Client extends OAuth2Client {

@@ -1,3 +1,3 @@
 ## Changes
 
-- Fix chessboard rendering issues in AppImage file.
+- Use a fallback for gnome keyring in AppImage in case of failure

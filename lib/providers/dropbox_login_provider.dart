@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:oauth2_client/access_token_response.dart';
+import 'package:oauth2_client/interfaces.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:rich_chess_notes/models/synchronisation_items/dropbox_account.dart';
 import 'package:rich_chess_notes/models/synchronisation_items/dropbox_oauth2_client.dart';
 import 'package:rich_chess_notes/providers/dropbox_account_notifier.dart';
 import 'package:rich_chess_notes/providers/sync_provider.dart';
+import 'package:rich_chess_notes/services/resilient_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,8 +22,8 @@ class DropboxLogin extends _$DropboxLogin {
   static const _kRefreshTokenKey = 'dropbox_refresh_token';
   static const _kExpiresAtKey = 'dropbox_token_expires_at';
 
-  static final FlutterSecureStorage _secureStorage =
-      const FlutterSecureStorage();
+  static final ResilientSecureStorage _secureStorage =
+      ResilientSecureStorage();
 
   @override
   Future<AccessTokenResponse?> build() async {
@@ -40,6 +41,7 @@ class DropboxLogin extends _$DropboxLogin {
       grantType: OAuth2Helper.authorizationCode,
       authCodeParams: {'token_access_type': 'offline'},
       webAuthOpts: {'useWebview': false},
+      tokenStorage: TokenStorage(client.tokenUrl, storage: _secureStorage),
     );
 
     // Try to silently restore a previous session using stored refresh token.
@@ -165,7 +167,7 @@ class DropboxLogin extends _$DropboxLogin {
       // indicate loading so UI can show a spinner
       state = const AsyncValue.loading();
 
-      final refresh = await _secureStorage.read(key: _kRefreshTokenKey);
+      final refresh = await _secureStorage.read(_kRefreshTokenKey);
       debugPrint('Silent restore: refresh token present=${refresh != null}');
       if (refresh == null) {
         // nothing to restore
@@ -267,30 +269,24 @@ class DropboxLogin extends _$DropboxLogin {
   Future<void> _saveTokensToStorage(AccessTokenResponse? token) async {
     if (token == null) return;
     if (token.accessToken != null) {
-      await _secureStorage.write(
-        key: _kAccessTokenKey,
-        value: token.accessToken,
-      );
+      await _secureStorage.write(_kAccessTokenKey, token.accessToken!);
     }
     if (token.refreshToken != null) {
-      await _secureStorage.write(
-        key: _kRefreshTokenKey,
-        value: token.refreshToken,
-      );
+      await _secureStorage.write(_kRefreshTokenKey, token.refreshToken!);
     }
     if (token.expiresIn != null) {
       final expiresAt = DateTime.now()
           .toUtc()
           .add(Duration(seconds: token.expiresIn!))
           .toIso8601String();
-      await _secureStorage.write(key: _kExpiresAtKey, value: expiresAt);
+      await _secureStorage.write(_kExpiresAtKey, expiresAt);
     }
   }
 
   Future<void> _clearStoredTokens() async {
-    await _secureStorage.delete(key: _kAccessTokenKey);
-    await _secureStorage.delete(key: _kRefreshTokenKey);
-    await _secureStorage.delete(key: _kExpiresAtKey);
+    await _secureStorage.delete(_kAccessTokenKey);
+    await _secureStorage.delete(_kRefreshTokenKey);
+    await _secureStorage.delete(_kExpiresAtKey);
   }
 
   Future<void> _fetchAndSetAccount(String accessToken) async {

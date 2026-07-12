@@ -57,15 +57,6 @@ jobs:
           mkdir -p "$APPDIR/usr/bin"
           cp -r build/linux/x64/release/bundle/* "$APPDIR/usr/bin/"
 
-          cat > "$APPDIR/AppRun" <<'EOF'
-          #!/bin/sh
-          HERE="$(dirname "$(readlink -f "${0}")")"
-          export LD_LIBRARY_PATH="$HERE/usr/bin/lib:${LD_LIBRARY_PATH}"
-          exec "$HERE/usr/bin/${APP_NAME}" "$@"
-          EOF
-          sed -i "s/\${APP_NAME}/${APP_NAME}/" "$APPDIR/AppRun"
-          chmod +x "$APPDIR/AppRun"
-
           cp web/icons/Icon-512.png "$APPDIR/${APP_NAME}.png"
 
           cat > "$APPDIR/${APP_NAME}.desktop" <<EOF
@@ -77,11 +68,40 @@ jobs:
           Categories=Utility;
           EOF
 
-          wget -q -O appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-          chmod +x appimagetool
+          # Use linuxdeploy (+ its GTK plugin) instead of raw appimagetool so that
+          # system shared libraries required at runtime (e.g. libwebkit2gtk,
+          # GTK/GIO modules, gdk-pixbuf loaders) are actually bundled into the
+          # AppImage. A plain `appimagetool` run only zips up the Flutter bundle
+          # and relies on the target system already having these libraries
+          # installed, which isn't guaranteed (e.g. Fedora Workstation doesn't
+          # ship webkit2gtk-4.1 by default).
+          wget -q -O linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          chmod +x linuxdeploy
+          wget -q -O linuxdeploy-plugin-gtk https://github.com/linuxdeploy/linuxdeploy-plugin-gtk/releases/download/continuous/linuxdeploy-plugin-gtk-x86_64.AppImage
+          chmod +x linuxdeploy-plugin-gtk
+
+          # Flutter plugins (e.g. flutter_soloud, url_launcher_linux) are dlopen'd
+          # at runtime rather than linked into the main executable, so linuxdeploy
+          # won't discover them (and their own dependencies) unless listed
+          # explicitly.
+          LIBRARY_ARGS=()
+          for lib in "$APPDIR/usr/bin/lib"/*.so*; do
+            LIBRARY_ARGS+=(--library "$lib")
+          done
+
+          export DEPLOY_GTK_VERSION=3
+          export PATH="$PWD:$PATH"
+          ./linuxdeploy --appimage-extract-and-run \
+            --appdir "$APPDIR" \
+            --executable "$APPDIR/usr/bin/${APP_NAME}" \
+            --desktop-file "$APPDIR/${APP_NAME}.desktop" \
+            --icon-file "$APPDIR/${APP_NAME}.png" \
+            "${LIBRARY_ARGS[@]}" \
+            --plugin gtk \
+            --output appimage
 
           VERSION="${GITHUB_REF_NAME:-dev}"
-          ./appimagetool --appimage-extract-and-run "$APPDIR" "${APP_NAME}_${VERSION}_amd64.AppImage"
+          mv ./*.AppImage "${APP_NAME}_${VERSION}_amd64.AppImage"
 
       - name: Upload AppImage artifact
         uses: actions/upload-artifact@v4

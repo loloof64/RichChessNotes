@@ -1,3 +1,7 @@
+# 0.1.8
+
+- Adding missing dependencies for non-gtk environements for AppImage
+
 # 0.1.7
 
 - Use a fallback for gnome keyring in AppImage in case of failure

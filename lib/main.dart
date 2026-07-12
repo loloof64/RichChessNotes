@@ -1,13 +1,23 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rich_chess_notes/i18n/strings.g.dart';
 import 'package:rich_chess_notes/pages/home.dart';
 import 'package:rich_chess_notes/providers/dark_theme_provider.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
+
+  if (!kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+    await windowManager.ensureInitialized();
+    await windowManager.setTitle('Rich chess notes');
+  }
+
   runApp(ProviderScope(child: TranslationProvider(child: const MainApp())));
 }
 

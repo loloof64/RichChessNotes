@@ -380,18 +380,18 @@ packages:
     dependency: transitive
     description:
       name: flutter_web_auth_2
-      sha256: "8f9303471dcd96670878c9b7c0c4e14c37595b2add67465f6a868f17a5872dfc"
+      sha256: "616c1f7f0664f55380165d9217de669e1c34b5c4eac267f2bd71a876783eca50"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "6.0.0-alpha.5"
   flutter_web_auth_2_platform_interface:
     dependency: transitive
     description:
       name: flutter_web_auth_2_platform_interface
-      sha256: ba0fbba55bffb47242025f96852ad1ffba34bc451568f56ef36e613612baffab
+      sha256: "6d3f35c0435225f31c9734be69cb5ce6f4fad194d6648b00c10eaf5a844837c9"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0-alpha.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -601,10 +601,10 @@ packages:
     dependency: "direct main"
     description:
       name: oauth2_client
-      sha256: "74d1024ce3bd8c6012d079e075068c94d64d804a40bcb3d4adb7348bf0c278f7"
+      sha256: "741715f5e3f4c1009605ffafd666f09487af8df84750e92e9d05a784d1c5dd40"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.2"
+    version: "5.0.0-alpha.0"
   objective_c:
     dependency: transitive
     description:
@@ -1158,10 +1158,10 @@ packages:
     dependency: transitive
     description:
       name: window_to_front
-      sha256: "14fad8984db4415e2eeb30b04bb77140b180e260d6cb66b26de126a8657a9241"
+      sha256: fe896421a872360fe38b40ab3371f94fd7ae24bd0413a0b9bbfd14e27d8cba5a
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "1.0.0"
   xdg_directories:
     dependency: transitive
     description:

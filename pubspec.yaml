@@ -16,7 +16,7 @@ dependencies:
   chess_vectors_flutter: ^1.0.7
   flutter_riverpod: ^3.2.1
   riverpod_annotation: ^4.0.2
-  oauth2_client: ^4.3.2
+  oauth2_client: ^5.0.0-alpha.0
   path: ^1.9.1
   path_provider: ^2.1.6
   http: ^1.6.0

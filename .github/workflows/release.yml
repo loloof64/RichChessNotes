@@ -1,0 +1,137 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+env:
+  APP_NAME: rich_chess_notes
+
+jobs:
+  build-linux:
+    name: Build Linux AppImage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang cmake ninja-build pkg-config \
+            libgtk-3-dev liblzma-dev libstdc++-12-dev \
+            libsecret-1-dev
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Enable Linux desktop
+        run: flutter config --enable-linux-desktop
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Linux release
+        run: flutter build linux --release
+
+      - name: Package AppImage
+        run: |
+          set -e
+          APPDIR=AppDir
+          mkdir -p "$APPDIR/usr/bin"
+          cp -r build/linux/x64/release/bundle/* "$APPDIR/usr/bin/"
+
+          cat > "$APPDIR/AppRun" <<'EOF'
+          #!/bin/sh
+          HERE="$(dirname "$(readlink -f "${0}")")"
+          exec "$HERE/usr/bin/${APP_NAME}" "$@"
+          EOF
+          sed -i "s/\${APP_NAME}/${APP_NAME}/" "$APPDIR/AppRun"
+          chmod +x "$APPDIR/AppRun"
+
+          cp web/icons/Icon-512.png "$APPDIR/${APP_NAME}.png"
+
+          cat > "$APPDIR/${APP_NAME}.desktop" <<EOF
+          [Desktop Entry]
+          Name=Rich Chess Notes
+          Exec=${APP_NAME}
+          Icon=${APP_NAME}
+          Type=Application
+          Categories=Utility;
+          EOF
+
+          wget -q -O appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool
+
+          VERSION="${GITHUB_REF_NAME:-dev}"
+          ./appimagetool --appimage-extract-and-run "$APPDIR" "${APP_NAME}_${VERSION}_amd64.AppImage"
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-appimage
+          path: "*.AppImage"
+          if-no-files-found: error
+
+  build-windows:
+    name: Build Windows zip
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows release
+        run: flutter build windows --release
+
+      - name: Package zip
+        shell: pwsh
+        run: |
+          $version = if ($env:GITHUB_REF_NAME) { $env:GITHUB_REF_NAME } else { "dev" }
+          $zipName = "${env:APP_NAME}_${version}_windows64.zip"
+          Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath $zipName
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-zip
+          path: "*.zip"
+          if-no-files-found: error
+
+  release:
+    name: Publish release
+    needs: [build-linux, build-windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-appimage
+          path: artifacts
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-zip
+          path: artifacts
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body_path: release_message.md
+          files: artifacts/*

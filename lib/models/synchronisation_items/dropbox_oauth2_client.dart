@@ -9,7 +9,7 @@ final isDesktop =
 
 final redirectUri = isDesktop
     ? 'http://localhost:53682/oauth2redirect'
-    : 'https://rich-chess-notes-website.vercel.app/oauth2redirect';
+    : 'https://loloof64.github.io/RichChessNotes//oauth2redirect';
 
 final callbackUrlScheme = isDesktop
     ? 'http://localhost:53682'

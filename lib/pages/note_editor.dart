@@ -204,45 +204,56 @@ highlights:
             return const Center(child: CircularProgressIndicator());
           }
 
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: TextField(
-                    controller: _textController,
-                    maxLines: null,
-                    expands: true,
-                    textAlignVertical: TextAlignVertical.top,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: t.pages.note_editor.placeholder,
-                    ),
-                  ),
-                ),
+          final editZone = Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextField(
+              controller: _textController,
+              maxLines: null,
+              expands: true,
+              textAlignVertical: TextAlignVertical.top,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: t.pages.note_editor.placeholder,
               ),
+            ),
+          );
 
-              const VerticalDivider(width: 1),
+          final previewZone = SingleChildScrollView(
+            padding: const EdgeInsets.all(8),
+            child: MarkdownBody(
+              data: _previewData,
 
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(8),
-                  child: MarkdownBody(
-                    data: _previewData,
+              extensionSet: md.ExtensionSet([
+                ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                ChessBlockSyntax(),
+              ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
 
-                    extensionSet: md.ExtensionSet([
-                      ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                      ChessBlockSyntax(),
-                    ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
+              builders: {'chess': ChessBuilder(onFenEdited: _updateFenInSource)},
+            ),
+          );
 
-                    builders: {
-                      'chess': ChessBuilder(onFenEdited: _updateFenInSource),
-                    },
-                  ),
-                ),
-              ),
-            ],
+          return OrientationBuilder(
+            builder: (context, orientation) {
+              if (orientation == Orientation.portrait) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: editZone),
+                    const Divider(height: 1),
+                    Expanded(child: previewZone),
+                  ],
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: editZone),
+                  const VerticalDivider(width: 1),
+                  Expanded(child: previewZone),
+                ],
+              );
+            },
           );
         },
       ),

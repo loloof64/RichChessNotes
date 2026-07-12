@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "title": "Accueil",
+      "misc": {
+        "base_directory": "[RACINE_APP]",
+        "no_item": "Aucun élément"
+      },
+      "misc_errors": {
+        "failed_opening_folder": "Échec d'ouverture du dossier",
+        "failed_opening_note": "Échec d'ouverture de la note",
+        "failed_opening_note_details": "Échec d'ouverture des détails de la note",
+        "failed_deleting_folder": "Échec de suppression de dossier"
+      },
+      "delete_folder_dialog": {
+        "title": "Supprimer le dossier ?",
+        "message": "Voulez-vous supprimer le dossier $name ?"
+      },
+      "create_folder_dialog": {
+        "title": "Créér un dossier",
+        "placeholder": "Nom"
+      },
+      "rename_folder_errors": {
+        "already_exists": "Le dossier existe déjà",
+        "modification_error": "Échec de la modification du dossier"
+      },
+      "create_folder_errors": {
+        "already_exists": "Le dossier existe déjà",
+        "creation_error": "Échec de la création du dossier"
+      },
+      "create_note_errors": {
+        "failed_creating_note": "Échec de la création de la note"
+      },
+      "rename_folder_dialog": {
+        "title": "Renommer le dossier ($oldFolderName)",
+        "name_placeholder": "Nouveau nom"
+      },
+      "new_filename_dialog": {
+        "title": "Créer une nouvelle note",
+        "placeholder": "Nom"
+      }
+    },
+    "note_editor": {
+      "title": "Éditeur de note",
+      "placeholder": "Ecrivez votre texte en Markdown...",
+      "insert_board_tooltip": "Insérer un échiquier",
+      "save_content_dialog": {
+        "title": "Sauvegarder ?",
+        "message": "Souhaitez-vous sauvegarder le contenu ?"
+      },
+      "content_saved": "Contenu sauvegardé"
+    },
+    "note_details": {
+      "title": "Details de la note"
+    }
+  },
+  "misc": {
+    "buttons": {
+      "ok": "Ok",
+      "cancel": "Annuler"
+    },
+    "cancelled_by_user": "Annulé par l'utilisateur"
+  }
+}

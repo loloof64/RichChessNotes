@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "title": "Inicio",
+      "misc": {
+        "base_directory": "[RAÍZ_APP]",
+        "no_item": "Ningún elemento"
+      },
+      "misc_errors": {
+        "failed_opening_folder": "No se pudo abrir la carpeta",
+        "failed_opening_note": "No se pudo abrir la nota",
+        "failed_opening_note_details": "No se pudieron abrir los detalles de la nota",
+        "failed_deleting_folder": "No se pudo eliminar la carpeta"
+      },
+      "delete_folder_dialog": {
+        "title": "¿Eliminar carpeta?",
+        "message": "¿Deseas eliminar la carpeta $name?"
+      },
+      "create_folder_dialog": {
+        "title": "Crear nueva carpeta",
+        "placeholder": "Nombre"
+      },
+      "rename_folder_errors": {
+        "already_exists": "La carpeta ya existe",
+        "modification_error": "No se pudo modificar la carpeta"
+      },
+      "create_folder_errors": {
+        "already_exists": "La carpeta ya existe",
+        "creation_error": "No se pudo crear la carpeta"
+      },
+      "create_note_errors": {
+        "failed_creating_note": "No se pudo crear la nota"
+      },
+      "rename_folder_dialog": {
+        "title": "Renombrar carpeta ($oldFolderName)",
+        "name_placeholder": "Nuevo nombre"
+      },
+      "new_filename_dialog": {
+        "title": "Crear nueva nota",
+        "placeholder": "Nombre"
+      }
+    },
+    "note_editor": {
+      "title": "Editor de notas",
+      "placeholder": "Escribe tu texto en markdown...",
+      "insert_board_tooltip": "Insertar un tablero de ajedrez",
+      "save_content_dialog": {
+        "title": "¿Guardar contenido?",
+        "message": "¿Deseas guardar el contenido?"
+      },
+      "content_saved": "Contenido guardado"
+    },
+    "note_details": {
+      "title": "Detalles de la nota"
+    }
+  },
+  "misc": {
+    "buttons": {
+      "ok": "De acuerdo",
+      "cancel": "Anular"
+    },
+    "cancelled_by_user": "Cancelado por el usuario"
+  }
+}

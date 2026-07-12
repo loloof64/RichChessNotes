@@ -1,14 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:remix_icons_flutter/remixicon_ids.dart';
 
 import 'package:rich_chess_notes/core/markdown/chess_block_syntax.dart';
 import 'package:rich_chess_notes/core/markdown/chess_builder.dart';
+import 'package:rich_chess_notes/i18n/strings.g.dart';
 
 class NoteEditorPage extends StatefulWidget {
-  const NoteEditorPage({super.key});
+  const NoteEditorPage({super.key, required this.filePath});
+  final String filePath;
 
   @override
   State<NoteEditorPage> createState() => _NoteEditorPageState();
@@ -18,25 +22,6 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
   static const _debounceDuration = Duration(milliseconds: 500);
 
   static const _initialMarkdown = '''
-### Simple title
-
-Avant l'échiquier
-
-:::chess
-fen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-orientation: white
-lastMove: e2e4
-
-arrows:
-  - e2e4: yellow
-  - c7c5: blue
-
-highlights:
-  - e4: red
-  - c5: green
-:::
-
-Après l'échiquier.
 ''';
 
   static const _chessTemplate = ''':::chess
@@ -54,6 +39,7 @@ highlights:
 :::''';
 
   late final TextEditingController _textController;
+  late Future<String> _fileDataFuture;
   late String _previewData;
   Timer? _debounceTimer;
 
@@ -63,6 +49,17 @@ highlights:
     _textController = TextEditingController(text: _initialMarkdown);
     _previewData = _initialMarkdown;
     _textController.addListener(_onTextChanged);
+    _loadFileData();
+  }
+
+  void _loadFileData() {
+    _fileDataFuture = File(widget.filePath).readAsString();
+    _fileDataFuture.then((data) {
+      setState(() {
+        _textController.text = data;
+        _previewData = data;
+      });
+    });
   }
 
   void _onTextChanged() {
@@ -132,6 +129,48 @@ highlights:
     );
   }
 
+  void _purposeSaveContent() async {
+    final isOk = await showDialog<bool>(
+      context: context,
+      builder: (innerCtx) {
+        return AlertDialog(
+          title: Text(t.pages.note_editor.save_content_dialog.title),
+          content: Text(t.pages.note_editor.save_content_dialog.message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(
+                t.misc.buttons.cancel,
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text(
+                t.misc.buttons.ok,
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    if (isOk == true) {
+      await File(
+        widget.filePath,
+      ).writeAsString(_textController.text.toString());
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(t.pages.note_editor.content_saved)),
+      );
+    } else {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(t.misc.cancelled_by_user)));
+    }
+  }
+
   @override
   void dispose() {
     _debounceTimer?.cancel();
@@ -144,55 +183,68 @@ highlights:
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editing note'),
+        title: Text(t.pages.note_editor.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.grid_on),
-            tooltip: 'Insérer un échiquier',
+            tooltip: t.pages.note_editor.insert_board_tooltip,
             onPressed: _insertChessTemplate,
+          ),
+          IconButton(
+            onPressed: _purposeSaveContent,
+            icon: Icon(RemixIcon.save2Fill),
           ),
         ],
       ),
 
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextField(
-                controller: _textController,
-                maxLines: null,
-                expands: true,
-                textAlignVertical: TextAlignVertical.top,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Écrivez votre note en markdown...',
+      body: FutureBuilder<String>(
+        future: _fileDataFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: TextField(
+                    controller: _textController,
+                    maxLines: null,
+                    expands: true,
+                    textAlignVertical: TextAlignVertical.top,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: t.pages.note_editor.placeholder,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          const VerticalDivider(width: 1),
+              const VerticalDivider(width: 1),
 
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(8),
-              child: MarkdownBody(
-                data: _previewData,
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(8),
+                  child: MarkdownBody(
+                    data: _previewData,
 
-                extensionSet: md.ExtensionSet([
-                  ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                  ChessBlockSyntax(),
-                ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
+                    extensionSet: md.ExtensionSet([
+                      ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                      ChessBlockSyntax(),
+                    ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
 
-                builders: {
-                  'chess': ChessBuilder(onFenEdited: _updateFenInSource),
-                },
+                    builders: {
+                      'chess': ChessBuilder(onFenEdited: _updateFenInSource),
+                    },
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }

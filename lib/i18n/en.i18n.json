@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "title": "Home",
+      "misc": {
+        "base_directory": "[APP_ROOT]",
+        "no_item": "No item"
+      },
+      "misc_errors": {
+        "failed_opening_folder": "Failed to open folder",
+        "failed_opening_note": "Failed to open note",
+        "failed_opening_note_details": "Failed to open note details",
+        "failed_deleting_folder": "Failed to delete folder"
+      },
+      "delete_folder_dialog": {
+        "title": "Delete folder ?",
+        "message": "Do you want to delete folder $name ?"
+      },
+      "create_folder_dialog": {
+        "title": "Create new folder",
+        "placeholder": "Name"
+      },
+      "rename_folder_errors": {
+        "already_exists": "Folder already exists",
+        "modification_error": "Failed to modify folder"
+      },
+      "create_folder_errors": {
+        "already_exists": "Folder already exists",
+        "creation_error": "Failed to create folder"
+      },
+      "create_note_errors": {
+        "failed_creating_note": "Failed to create note"
+      },
+      "rename_folder_dialog": {
+        "title": "Rename folder ($oldFolderName)",
+        "name_placeholder": "New name"
+      },
+      "new_filename_dialog": {
+        "title": "Create new note",
+        "placeholder": "Name"
+      }
+    },
+    "note_editor": {
+      "title": "Note editor",
+      "placeholder": "Write your text in markdown...",
+      "insert_board_tooltip": "Insert a chess board",
+      "save_content_dialog": {
+        "title": "Save content ?",
+        "message": "Do you want to save content ?"
+      },
+      "content_saved": "Content saved"
+    },
+    "note_details": {
+      "title": "Note details"
+    }
+  },
+  "misc": {
+    "buttons": {
+      "ok": "Ok",
+      "cancel": "Cancel"
+    },
+    "cancelled_by_user": "Cancelled by user"
+  }
+}

@@ -27,7 +27,7 @@ In order to update locales, run `dart run slang` from your terminal.
 ### Riverpod files generation
 
 ```bash
-dart run build_runner watch -d
+dart run build_runner build
 ```
 
 ### Launcher icons

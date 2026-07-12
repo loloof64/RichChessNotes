@@ -1,3 +1,7 @@
+# 0 1.9
+
+- Adding missing dependencies for non-gtk environements for AppImage
+
 # 0.1.8
 
 - Adding missing dependencies for non-gtk environements for AppImage

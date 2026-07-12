@@ -1,3 +1,7 @@
+# 0.1.5
+
+- Fix chessboard rendering issues in AppImage file.
+
 # 0.1.4
 
 - Fix Github action workflow for linux.

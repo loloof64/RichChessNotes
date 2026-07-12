@@ -1,3 +1,3 @@
 ## Changes
 
-- Initial release ; is feature complete.
+- Fix chessboard rendering issues in AppImage file.

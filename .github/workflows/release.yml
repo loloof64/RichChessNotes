@@ -41,6 +41,15 @@ jobs:
       - name: Build Linux release
         run: flutter build linux --release
 
+      - name: Bundle flutter_soloud native libraries
+        # flutter_soloud's CMakeLists links against its vendored libFLAC/opus/ogg/vorbis
+        # libraries but doesn't declare PLUGIN_BUNDLED_LIBRARIES, so flutter build never
+        # copies them into the bundle. Without this, the app fails at runtime with
+        # "cannot open shared object file" for these libs.
+        run: |
+          cp linux/flutter/ephemeral/.plugin_symlinks/flutter_soloud/linux/libs/*.so* \
+            build/linux/x64/release/bundle/lib/
+
       - name: Package AppImage
         run: |
           set -e

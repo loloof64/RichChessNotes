@@ -12,7 +12,9 @@ env:
 jobs:
   build-linux:
     name: Build Linux AppImage
-    runs-on: ubuntu-latest
+    # Build on the oldest available Ubuntu runner to link against an older
+    # glibc, maximizing AppImage compatibility with older distros.
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
@@ -22,7 +24,8 @@ jobs:
           sudo apt-get install -y \
             clang cmake ninja-build pkg-config \
             libgtk-3-dev liblzma-dev libstdc++-12-dev \
-            libsecret-1-dev
+            libsecret-1-dev \
+            libwebkit2gtk-4.0-dev libsoup2.4-dev
 
       - uses: subosito/flutter-action@v2
         with:

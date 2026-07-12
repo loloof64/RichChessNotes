@@ -29,3 +29,9 @@ In order to update locales, run `dart run slang` from your terminal.
 ```bash
 dart run build_runner watch -d
 ```
+
+### Launcher icons
+
+```bash
+dart run icons_launcher:create
+```

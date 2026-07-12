@@ -104,7 +104,7 @@ class SyncEngine {
     }
 
     // Guard 2: remote scan empty but local has files + non-empty manifest.
-    // Means the remote /books folder was deleted (e.g. by a previous bad sync).
+    // Means the remote sync root folder was deleted (e.g. by a previous bad sync).
     // Recover by treating this as a first-sync so all local files get uploaded
     // and nothing is deleted locally.
     final remoteRootDeleted =
@@ -113,7 +113,7 @@ class SyncEngine {
         _previousManifest.isNotEmpty;
     if (remoteRootDeleted) {
       debugPrint(
-        'Sync: remote /books folder appears deleted '
+        'Sync: remote sync root folder appears deleted '
         '(0 remote entries, ${_previousManifest.length} manifest entries, '
         '${localFiles.length} local entries). '
         'Recovering: treating as first-sync and uploading all local files.',
@@ -146,13 +146,14 @@ class SyncEngine {
 
     if (!await _localBooksDir.exists()) return map;
 
-    // Parent dir is the appSupportDir; relative paths start with "books/..."
+    // Parent dir is the appSupportDir; relative paths start with the sync
+    // root folder name (e.g. "notes/...").
     final baseDir = _localBooksDir.parent;
 
-    // Include the books root dir itself. Dropbox list_folder('/books') returns
-    // '/books' as one of the entries (tag=folder), but Dart's Directory.list()
-    // only returns the *contents*, not the directory itself. Without this entry
-    // the engine sees books as "present remote, absent local" → deleteRemote.
+    // Include the sync root dir itself. Dropbox list_folder returns the root
+    // as one of the entries (tag=folder), but Dart's Directory.list() only
+    // returns the *contents*, not the directory itself. Without this entry
+    // the engine sees the root as "present remote, absent local" → deleteRemote.
     final rootRelative = p
         .relative(_localBooksDir.path, from: baseDir.path)
         .replaceAll('\\', '/');
@@ -191,7 +192,9 @@ class SyncEngine {
   // ---------------------------------------------------------------------------
 
   Future<Map<String, _RemoteFileInfo>> _scanRemoteFiles() async {
-    final entries = await _api.listAllFilesForSync('/books');
+    final entries = await _api.listAllFilesForSync(
+      '/${p.basename(_localBooksDir.path)}',
+    );
     final map = <String, _RemoteFileInfo>{};
 
     for (final entry in entries) {
@@ -246,9 +249,9 @@ class SyncEngine {
     // we want to upload all local files without planning any deletions.
     final isFirstSync = _previousManifest.isEmpty || forceFirstSync;
 
-    // The sync root folder ('books') must never be deleted — it is the anchor
+    // The sync root folder must never be deleted — it is the anchor
     // of the whole sync tree. Deleting it would remove all content from Dropbox.
-    const syncRoot = 'books';
+    final syncRoot = p.basename(_localBooksDir.path).toLowerCase();
 
     for (final path in allPaths) {
       // Belt-and-suspenders: never plan a deletion of the sync root itself.

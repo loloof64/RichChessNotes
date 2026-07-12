@@ -60,6 +60,7 @@ jobs:
           cat > "$APPDIR/AppRun" <<'EOF'
           #!/bin/sh
           HERE="$(dirname "$(readlink -f "${0}")")"
+          export LD_LIBRARY_PATH="$HERE/usr/bin/lib:${LD_LIBRARY_PATH}"
           exec "$HERE/usr/bin/${APP_NAME}" "$@"
           EOF
           sed -i "s/\${APP_NAME}/${APP_NAME}/" "$APPDIR/AppRun"

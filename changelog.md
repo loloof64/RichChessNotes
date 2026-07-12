@@ -1,3 +1,7 @@
+# 0.1.6
+
+- Fix chessboard rendering issues in AppImage file.
+
 # 0.1.5
 
 - Fix chessboard rendering issues in AppImage file.

@@ -2,6 +2,8 @@
 
 - We can also rename/delete a note
 - A more friendly default content for new notes
+- Solve a little bug on new note creation
+- Trim names before folder/note creation
 
 # 0 1.9
 

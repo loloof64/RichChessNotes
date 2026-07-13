@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:markdown/markdown.dart' as md;
 
 class ChessBlockSyntax extends md.BlockSyntax {
@@ -43,9 +42,6 @@ class ChessBlockSyntax extends md.BlockSyntax {
     }
 
     final content = buffer.toString().trim();
-    if (kDebugMode) {
-      print('Chess block content: [$content]');
-    }
     return md.Element.text('chess', content);
   }
 }

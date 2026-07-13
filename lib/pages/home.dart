@@ -81,7 +81,6 @@ class _HomeWidgetState extends State<HomeWidget> {
           actions: [
             TextButton(
               onPressed: () {
-                textController.dispose();
                 Navigator.of(context).pop(null);
               },
               child: Text(
@@ -92,7 +91,6 @@ class _HomeWidgetState extends State<HomeWidget> {
             TextButton(
               onPressed: () {
                 final newName = textController.text.toString();
-                textController.dispose();
                 Navigator.of(context).pop(newName);
               },
               child: Text(

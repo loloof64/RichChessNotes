@@ -42,6 +42,9 @@ class ChessBuilder extends MarkdownElementBuilder {
   ChessBuilder({this.onFenEdited});
 
   @override
+  bool isBlockElement() => true;
+
+  @override
   Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) {
     late final ChessDefinition chess;
     final blockContent = element.textContent;

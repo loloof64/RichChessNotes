@@ -1,19 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:yaml/yaml.dart';
 
 import 'chess_definition.dart';
 
 ChessDefinition parseChess(String source) {
   final trimmed = source.trim();
-  if (kDebugMode) {
-    print('Parsing YAML: [$trimmed]');
-  }
   final yaml = loadYaml(trimmed);
-
-  if (kDebugMode) {
-    print('YAML type: ${yaml.runtimeType}');
-    print('YAML value: $yaml');
-  }
 
   if (yaml is! YamlMap) {
     throw FormatException(

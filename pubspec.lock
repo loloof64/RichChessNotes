@@ -412,7 +412,7 @@ packages:
     source: hosted
     version: "4.2.2"
   flutter_soloud:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_soloud
       sha256: "5ffc8db6d9e5751ff2e8c3b7934b1973dc788fb541b9000561b1168c7798dae0"

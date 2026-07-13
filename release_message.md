@@ -1,3 +1,4 @@
 ## Changes
 
-- Adding missing dependencies for non-gtk environements for AppImage
+- We can also rename/delete a note
+- A more friendly default content for new notes

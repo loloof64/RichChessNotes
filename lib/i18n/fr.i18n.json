@@ -73,7 +73,8 @@
       "new_filename_dialog": {
         "title": "Créer une nouvelle note",
         "placeholder": "Nom"
-      }
+      },
+      "new_note_default_content": "# Contenu d'exemple\n\nEn mode édition, vous pouvez éditer l'échiquier ci-dessous avec\n- une position personnalisée (vous pouvez aussi utiliser le bouton d'édition pour cela)\n- des couleurs de cases personnalisées\n- un nombre et des couleurs de flèches personnalisés\n- une orientation personnalisée\n- une flèche de dernier coup personnalisée\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nMais vous pouvez aussi ajouter un nouvel échiquier simplement en cliquant sur le \nbouton dédié dans la barre d'outils."
     },
     "note_editor": {
       "title": "Éditeur de note",

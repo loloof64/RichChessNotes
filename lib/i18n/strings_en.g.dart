@@ -148,6 +148,9 @@ class Translations$pages$home$en {
 	late final Translations$pages$home$rename_note_dialog$en rename_note_dialog = Translations$pages$home$rename_note_dialog$en._(_root);
 	late final Translations$pages$home$rename_note_errors$en rename_note_errors = Translations$pages$home$rename_note_errors$en._(_root);
 	late final Translations$pages$home$new_filename_dialog$en new_filename_dialog = Translations$pages$home$new_filename_dialog$en._(_root);
+
+	/// en: '# Sample content In edit mode, you edit the chessboard below with - custom position (you can also use the edit button for that) - custom cells colors - custom arrows count and colors - custom orientation - custom last move arrow :::chess fen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 orientation: white lastMove: d8h4 arrows: - e2e4: yellow - c7c5: blue highlights: - e4: red - c5: green ::: But you can also add a new chess board simply by clicking on the dedicated button in the app bar.'
+	String get new_note_default_content => '# Sample content\n\nIn edit mode, you edit the chessboard below with\n- custom position (you can also use the edit button for that)\n- custom cells colors\n- custom arrows count and colors\n- custom orientation\n- custom last move arrow\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nBut you can also add a new chess board simply by clicking on the \ndedicated button in the app bar.';
 }
 
 // Path: pages.note_editor
@@ -477,6 +480,7 @@ extension on Translations {
 			'pages.home.rename_note_errors.modification_error' => 'Failed to modify note',
 			'pages.home.new_filename_dialog.title' => 'Create new note',
 			'pages.home.new_filename_dialog.placeholder' => 'Name',
+			'pages.home.new_note_default_content' => '# Sample content\n\nIn edit mode, you edit the chessboard below with\n- custom position (you can also use the edit button for that)\n- custom cells colors\n- custom arrows count and colors\n- custom orientation\n- custom last move arrow\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nBut you can also add a new chess board simply by clicking on the \ndedicated button in the app bar.',
 			'pages.note_editor.title' => 'Note editor',
 			'pages.note_editor.placeholder' => 'Write your text in markdown...',
 			'pages.note_editor.insert_board_tooltip' => 'Insert a chess board',

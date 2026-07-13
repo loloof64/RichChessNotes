@@ -127,7 +127,9 @@ class _HomeWidgetState extends State<HomeWidget> {
       }
 
       final filePath = p.join(_currentDirectory!.path, newNoteName);
-      await File(filePath).create();
+      await File(
+        filePath,
+      ).writeAsString(t.pages.home.new_note_default_content);
 
       if (!mounted) return;
       Navigator.of(context).push(

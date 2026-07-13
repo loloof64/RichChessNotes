@@ -123,6 +123,7 @@ class _Translations$pages$home$es implements Translations$pages$home$en {
 	@override late final _Translations$pages$home$rename_note_dialog$es rename_note_dialog = _Translations$pages$home$rename_note_dialog$es._(_root);
 	@override late final _Translations$pages$home$rename_note_errors$es rename_note_errors = _Translations$pages$home$rename_note_errors$es._(_root);
 	@override late final _Translations$pages$home$new_filename_dialog$es new_filename_dialog = _Translations$pages$home$new_filename_dialog$es._(_root);
+	@override String get new_note_default_content => '# Contenido de ejemplo\n\nEn el modo de edición, puedes editar el tablero de ajedrez de abajo con\n- una posición personalizada (también puedes usar el botón de edición para eso)\n- colores de casillas personalizados\n- número y colores de flechas personalizados\n- una orientación personalizada\n- una flecha de última jugada personalizada\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nPero también puedes añadir un nuevo tablero de ajedrez simplemente haciendo clic \nen el botón correspondiente en la barra de la aplicación.';
 }
 
 // Path: pages.note_editor
@@ -369,6 +370,7 @@ extension on TranslationsEs {
 			'pages.home.rename_note_errors.modification_error' => 'No se pudo modificar la nota',
 			'pages.home.new_filename_dialog.title' => 'Crear nueva nota',
 			'pages.home.new_filename_dialog.placeholder' => 'Nombre',
+			'pages.home.new_note_default_content' => '# Contenido de ejemplo\n\nEn el modo de edición, puedes editar el tablero de ajedrez de abajo con\n- una posición personalizada (también puedes usar el botón de edición para eso)\n- colores de casillas personalizados\n- número y colores de flechas personalizados\n- una orientación personalizada\n- una flecha de última jugada personalizada\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nPero también puedes añadir un nuevo tablero de ajedrez simplemente haciendo clic \nen el botón correspondiente en la barra de la aplicación.',
 			'pages.note_editor.title' => 'Editor de notas',
 			'pages.note_editor.placeholder' => 'Escribe tu texto en markdown...',
 			'pages.note_editor.insert_board_tooltip' => 'Insertar un tablero de ajedrez',

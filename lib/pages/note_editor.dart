@@ -228,7 +228,9 @@ highlights:
                 ChessBlockSyntax(),
               ], md.ExtensionSet.gitHubFlavored.inlineSyntaxes),
 
-              builders: {'chess': ChessBuilder(onFenEdited: _updateFenInSource)},
+              builders: {
+                'chess': ChessBuilder(onFenEdited: _updateFenInSource),
+              },
             ),
           );
 

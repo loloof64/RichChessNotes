@@ -1,3 +1,8 @@
+# 0.1.10
+
+- We can also rename/delete a note
+- A more friendly default content for new notes
+
 # 0 1.9
 
 - Adding missing dependencies for non-gtk environements for AppImage

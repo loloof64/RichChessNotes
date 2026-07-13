@@ -73,7 +73,8 @@
       "new_filename_dialog": {
         "title": "Crear nueva nota",
         "placeholder": "Nombre"
-      }
+      },
+      "new_note_default_content": "# Contenido de ejemplo\n\nEn el modo de edición, puedes editar el tablero de ajedrez de abajo con\n- una posición personalizada (también puedes usar el botón de edición para eso)\n- colores de casillas personalizados\n- número y colores de flechas personalizados\n- una orientación personalizada\n- una flecha de última jugada personalizada\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nPero también puedes añadir un nuevo tablero de ajedrez simplemente haciendo clic \nen el botón correspondiente en la barra de la aplicación."
     },
     "note_editor": {
       "title": "Editor de notas",

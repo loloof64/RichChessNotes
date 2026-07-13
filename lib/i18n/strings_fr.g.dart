@@ -123,6 +123,7 @@ class _Translations$pages$home$fr implements Translations$pages$home$en {
 	@override late final _Translations$pages$home$rename_note_dialog$fr rename_note_dialog = _Translations$pages$home$rename_note_dialog$fr._(_root);
 	@override late final _Translations$pages$home$rename_note_errors$fr rename_note_errors = _Translations$pages$home$rename_note_errors$fr._(_root);
 	@override late final _Translations$pages$home$new_filename_dialog$fr new_filename_dialog = _Translations$pages$home$new_filename_dialog$fr._(_root);
+	@override String get new_note_default_content => '# Contenu d\'exemple\n\nEn mode édition, vous pouvez éditer l\'échiquier ci-dessous avec\n- une position personnalisée (vous pouvez aussi utiliser le bouton d\'édition pour cela)\n- des couleurs de cases personnalisées\n- un nombre et des couleurs de flèches personnalisés\n- une orientation personnalisée\n- une flèche de dernier coup personnalisée\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nMais vous pouvez aussi ajouter un nouvel échiquier simplement en cliquant sur le \nbouton dédié dans la barre d\'outils.';
 }
 
 // Path: pages.note_editor
@@ -369,6 +370,7 @@ extension on TranslationsFr {
 			'pages.home.rename_note_errors.modification_error' => 'Échec de la modification de la note',
 			'pages.home.new_filename_dialog.title' => 'Créer une nouvelle note',
 			'pages.home.new_filename_dialog.placeholder' => 'Nom',
+			'pages.home.new_note_default_content' => '# Contenu d\'exemple\n\nEn mode édition, vous pouvez éditer l\'échiquier ci-dessous avec\n- une position personnalisée (vous pouvez aussi utiliser le bouton d\'édition pour cela)\n- des couleurs de cases personnalisées\n- un nombre et des couleurs de flèches personnalisés\n- une orientation personnalisée\n- une flèche de dernier coup personnalisée\n\n:::chess\nfen: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\norientation: white\nlastMove: d8h4\n\narrows:\n  - e2e4: yellow\n  - c7c5: blue\n\nhighlights:\n  - e4: red\n  - c5: green\n:::\n\nMais vous pouvez aussi ajouter un nouvel échiquier simplement en cliquant sur le \nbouton dédié dans la barre d\'outils.',
 			'pages.note_editor.title' => 'Éditeur de note',
 			'pages.note_editor.placeholder' => 'Ecrivez votre texte en Markdown...',
 			'pages.note_editor.insert_board_tooltip' => 'Insérer un échiquier',

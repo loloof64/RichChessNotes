@@ -1,4 +1,4 @@
 ## Changes
 
 - Solve a little bug on new note creation
-- Trim names before folder/note creation
+- Trim name before folder/note creation

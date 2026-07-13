@@ -102,9 +102,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         );
       },
     );
-    if (newFileName == null || newFileName.isEmpty) throw "User cancelled";
-    if (newFileName.endsWith(".md")) return newFileName;
-    return "$newFileName.md";
+    if (newFileName == null || newFileName.trim().isEmpty) {
+      throw "User cancelled";
+    }
+    final usedFileName = newFileName.trim();
+    if (usedFileName.endsWith(".md")) return usedFileName;
+    return "$usedFileName.md";
   }
 
   Future<void> _purposeCreateNote() async {
@@ -125,9 +128,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       }
 
       final filePath = p.join(_currentDirectory!.path, newNoteName);
-      await File(
-        filePath,
-      ).writeAsString(t.pages.home.new_note_default_content);
+      await File(filePath).writeAsString(t.pages.home.new_note_default_content);
 
       if (!mounted) return;
       Navigator.of(context).push(
@@ -423,9 +424,9 @@ class _HomeWidgetState extends State<HomeWidget> {
       if (!mounted) {
         return;
       }
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.pages.home.misc_errors.failed_deleting_note)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(t.pages.home.misc_errors.failed_deleting_note)),
+      );
     }
   }
 
@@ -493,7 +494,9 @@ class _HomeWidgetState extends State<HomeWidget> {
         return;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.pages.home.rename_note_errors.modification_error)),
+        SnackBar(
+          content: Text(t.pages.home.rename_note_errors.modification_error),
+        ),
       );
     }
   }

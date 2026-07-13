@@ -1,11 +1,14 @@
+# 0.1.11
+
+- Solve a little bug on new note creation
+- Trim name before note creation
+
 # 0.1.10
 
 - We can also rename/delete a note
 - A more friendly default content for new notes
-- Solve a little bug on new note creation
-- Trim name before note creation
 
-# 0 1.9
+# 0.1.9
 
 - Adding missing dependencies for non-gtk environements for AppImage
 

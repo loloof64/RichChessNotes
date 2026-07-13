@@ -2,6 +2,7 @@
 
 - Solve a little bug on new note creation
 - Trim name before note creation
+- Fix a bug on note creation (android)
 
 # 0.1.10
 

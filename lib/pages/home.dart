@@ -379,6 +379,125 @@ class _HomeWidgetState extends State<HomeWidget> {
     }
   }
 
+  Future<void> _purposeDeleteNote(String path) async {
+    final name = path.split(Platform.pathSeparator).last;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(t.pages.home.delete_note_dialog.title),
+          content: Text(t.pages.home.delete_note_dialog.message(name: name)),
+          actions: [
+            TextButton(
+              child: Text(
+                t.misc.buttons.cancel,
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                t.misc.buttons.ok,
+                style: TextStyle(color: Colors.green),
+              ),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await _deleteNote(path);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteNote(String path) async {
+    try {
+      final savedNote = File(path);
+      await savedNote.delete();
+      _reloadContent();
+    } catch (e) {
+      debugPrint(e.toString());
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(t.pages.home.misc_errors.failed_deleting_note)));
+    }
+  }
+
+  Future<void> _purposeRenameNote(String path) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        String oldFileName = path.split(Platform.pathSeparator).last;
+        String baseName = p.basenameWithoutExtension(oldFileName);
+        String securedName = secureFileItemName(baseName);
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(
+                t.pages.home.rename_note_dialog.title(oldFileName: oldFileName),
+              ),
+              content: TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  labelText: t.pages.home.rename_note_dialog.name_placeholder,
+                ),
+                controller: TextEditingController(text: securedName),
+                onChanged: (value) => securedName = secureFileItemName(value),
+              ),
+              actions: [
+                TextButton(
+                  child: Text(
+                    t.misc.buttons.cancel,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text(
+                    t.misc.buttons.ok,
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    await _renameNote(path, "${securedName.trim()}.md");
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _renameNote(String path, String newName) async {
+    try {
+      final savedNote = File(path);
+      final newSavedNote = File("${_currentDirectory!.path}/$newName");
+      if (await newSavedNote.exists()) {
+        throw Exception(t.pages.home.rename_note_errors.already_exists);
+      }
+      await savedNote.rename(newSavedNote.path);
+      _reloadContent();
+    } catch (e) {
+      debugPrint(e.toString());
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(t.pages.home.rename_note_errors.modification_error)),
+      );
+    }
+  }
+
   Future<void> _purposeCreateFolder() async {
     String newName = "";
     showDialog(
@@ -556,6 +675,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 color: Colors.blue,
                               ),
                               Text(itemName),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                spacing: 8,
+                                children: [
+                                  IconButton(
+                                    onPressed: () =>
+                                        _purposeRenameNote(itemPath),
+                                    icon: Icon(Icons.abc),
+                                  ),
+                                  IconButton(
+                                    onPressed: () =>
+                                        _purposeDeleteNote(itemPath),
+                                    icon: Icon(Icons.delete),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         );

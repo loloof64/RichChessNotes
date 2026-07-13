@@ -139,11 +139,14 @@ class Translations$pages$home$en {
 	late final Translations$pages$home$misc$en misc = Translations$pages$home$misc$en._(_root);
 	late final Translations$pages$home$misc_errors$en misc_errors = Translations$pages$home$misc_errors$en._(_root);
 	late final Translations$pages$home$delete_folder_dialog$en delete_folder_dialog = Translations$pages$home$delete_folder_dialog$en._(_root);
+	late final Translations$pages$home$delete_note_dialog$en delete_note_dialog = Translations$pages$home$delete_note_dialog$en._(_root);
 	late final Translations$pages$home$create_folder_dialog$en create_folder_dialog = Translations$pages$home$create_folder_dialog$en._(_root);
 	late final Translations$pages$home$rename_folder_errors$en rename_folder_errors = Translations$pages$home$rename_folder_errors$en._(_root);
 	late final Translations$pages$home$create_folder_errors$en create_folder_errors = Translations$pages$home$create_folder_errors$en._(_root);
 	late final Translations$pages$home$create_note_errors$en create_note_errors = Translations$pages$home$create_note_errors$en._(_root);
 	late final Translations$pages$home$rename_folder_dialog$en rename_folder_dialog = Translations$pages$home$rename_folder_dialog$en._(_root);
+	late final Translations$pages$home$rename_note_dialog$en rename_note_dialog = Translations$pages$home$rename_note_dialog$en._(_root);
+	late final Translations$pages$home$rename_note_errors$en rename_note_errors = Translations$pages$home$rename_note_errors$en._(_root);
 	late final Translations$pages$home$new_filename_dialog$en new_filename_dialog = Translations$pages$home$new_filename_dialog$en._(_root);
 }
 
@@ -258,6 +261,9 @@ class Translations$pages$home$misc_errors$en {
 
 	/// en: 'Failed to delete folder'
 	String get failed_deleting_folder => 'Failed to delete folder';
+
+	/// en: 'Failed to delete note'
+	String get failed_deleting_note => 'Failed to delete note';
 }
 
 // Path: pages.home.delete_folder_dialog
@@ -273,6 +279,21 @@ class Translations$pages$home$delete_folder_dialog$en {
 
 	/// en: 'Do you want to delete folder $name ?'
 	String message({required Object name}) => 'Do you want to delete folder ${name} ?';
+}
+
+// Path: pages.home.delete_note_dialog
+class Translations$pages$home$delete_note_dialog$en {
+	Translations$pages$home$delete_note_dialog$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Delete note ?'
+	String get title => 'Delete note ?';
+
+	/// en: 'Do you want to delete note $name ?'
+	String message({required Object name}) => 'Do you want to delete note ${name} ?';
 }
 
 // Path: pages.home.create_folder_dialog
@@ -347,6 +368,36 @@ class Translations$pages$home$rename_folder_dialog$en {
 	String get name_placeholder => 'New name';
 }
 
+// Path: pages.home.rename_note_dialog
+class Translations$pages$home$rename_note_dialog$en {
+	Translations$pages$home$rename_note_dialog$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Rename note ($oldFileName)'
+	String title({required Object oldFileName}) => 'Rename note (${oldFileName})';
+
+	/// en: 'New name'
+	String get name_placeholder => 'New name';
+}
+
+// Path: pages.home.rename_note_errors
+class Translations$pages$home$rename_note_errors$en {
+	Translations$pages$home$rename_note_errors$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Note already exists'
+	String get already_exists => 'Note already exists';
+
+	/// en: 'Failed to modify note'
+	String get modification_error => 'Failed to modify note';
+}
+
 // Path: pages.home.new_filename_dialog
 class Translations$pages$home$new_filename_dialog$en {
 	Translations$pages$home$new_filename_dialog$en._(this._root);
@@ -406,8 +457,11 @@ extension on Translations {
 			'pages.home.misc_errors.failed_opening_note' => 'Failed to open note',
 			'pages.home.misc_errors.failed_opening_note_details' => 'Failed to open note details',
 			'pages.home.misc_errors.failed_deleting_folder' => 'Failed to delete folder',
+			'pages.home.misc_errors.failed_deleting_note' => 'Failed to delete note',
 			'pages.home.delete_folder_dialog.title' => 'Delete folder ?',
 			'pages.home.delete_folder_dialog.message' => ({required Object name}) => 'Do you want to delete folder ${name} ?',
+			'pages.home.delete_note_dialog.title' => 'Delete note ?',
+			'pages.home.delete_note_dialog.message' => ({required Object name}) => 'Do you want to delete note ${name} ?',
 			'pages.home.create_folder_dialog.title' => 'Create new folder',
 			'pages.home.create_folder_dialog.placeholder' => 'Name',
 			'pages.home.rename_folder_errors.already_exists' => 'Folder already exists',
@@ -417,6 +471,10 @@ extension on Translations {
 			'pages.home.create_note_errors.failed_creating_note' => 'Failed to create note',
 			'pages.home.rename_folder_dialog.title' => ({required Object oldFolderName}) => 'Rename folder (${oldFolderName})',
 			'pages.home.rename_folder_dialog.name_placeholder' => 'New name',
+			'pages.home.rename_note_dialog.title' => ({required Object oldFileName}) => 'Rename note (${oldFileName})',
+			'pages.home.rename_note_dialog.name_placeholder' => 'New name',
+			'pages.home.rename_note_errors.already_exists' => 'Note already exists',
+			'pages.home.rename_note_errors.modification_error' => 'Failed to modify note',
 			'pages.home.new_filename_dialog.title' => 'Create new note',
 			'pages.home.new_filename_dialog.placeholder' => 'Name',
 			'pages.note_editor.title' => 'Note editor',

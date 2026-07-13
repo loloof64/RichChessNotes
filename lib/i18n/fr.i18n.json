@@ -32,11 +32,16 @@
         "failed_opening_folder": "Échec d'ouverture du dossier",
         "failed_opening_note": "Échec d'ouverture de la note",
         "failed_opening_note_details": "Échec d'ouverture des détails de la note",
-        "failed_deleting_folder": "Échec de suppression de dossier"
+        "failed_deleting_folder": "Échec de suppression de dossier",
+        "failed_deleting_note": "Échec de suppression de la note"
       },
       "delete_folder_dialog": {
         "title": "Supprimer le dossier ?",
         "message": "Voulez-vous supprimer le dossier $name ?"
+      },
+      "delete_note_dialog": {
+        "title": "Supprimer la note ?",
+        "message": "Voulez-vous supprimer la note $name ?"
       },
       "create_folder_dialog": {
         "title": "Créér un dossier",
@@ -56,6 +61,14 @@
       "rename_folder_dialog": {
         "title": "Renommer le dossier ($oldFolderName)",
         "name_placeholder": "Nouveau nom"
+      },
+      "rename_note_dialog": {
+        "title": "Renommer la note ($oldFileName)",
+        "name_placeholder": "Nouveau nom"
+      },
+      "rename_note_errors": {
+        "already_exists": "La note existe déjà",
+        "modification_error": "Échec de la modification de la note"
       },
       "new_filename_dialog": {
         "title": "Créer une nouvelle note",

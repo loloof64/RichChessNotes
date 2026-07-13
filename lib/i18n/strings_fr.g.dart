@@ -114,11 +114,14 @@ class _Translations$pages$home$fr implements Translations$pages$home$en {
 	@override late final _Translations$pages$home$misc$fr misc = _Translations$pages$home$misc$fr._(_root);
 	@override late final _Translations$pages$home$misc_errors$fr misc_errors = _Translations$pages$home$misc_errors$fr._(_root);
 	@override late final _Translations$pages$home$delete_folder_dialog$fr delete_folder_dialog = _Translations$pages$home$delete_folder_dialog$fr._(_root);
+	@override late final _Translations$pages$home$delete_note_dialog$fr delete_note_dialog = _Translations$pages$home$delete_note_dialog$fr._(_root);
 	@override late final _Translations$pages$home$create_folder_dialog$fr create_folder_dialog = _Translations$pages$home$create_folder_dialog$fr._(_root);
 	@override late final _Translations$pages$home$rename_folder_errors$fr rename_folder_errors = _Translations$pages$home$rename_folder_errors$fr._(_root);
 	@override late final _Translations$pages$home$create_folder_errors$fr create_folder_errors = _Translations$pages$home$create_folder_errors$fr._(_root);
 	@override late final _Translations$pages$home$create_note_errors$fr create_note_errors = _Translations$pages$home$create_note_errors$fr._(_root);
 	@override late final _Translations$pages$home$rename_folder_dialog$fr rename_folder_dialog = _Translations$pages$home$rename_folder_dialog$fr._(_root);
+	@override late final _Translations$pages$home$rename_note_dialog$fr rename_note_dialog = _Translations$pages$home$rename_note_dialog$fr._(_root);
+	@override late final _Translations$pages$home$rename_note_errors$fr rename_note_errors = _Translations$pages$home$rename_note_errors$fr._(_root);
 	@override late final _Translations$pages$home$new_filename_dialog$fr new_filename_dialog = _Translations$pages$home$new_filename_dialog$fr._(_root);
 }
 
@@ -194,6 +197,7 @@ class _Translations$pages$home$misc_errors$fr implements Translations$pages$home
 	@override String get failed_opening_note => 'Échec d\'ouverture de la note';
 	@override String get failed_opening_note_details => 'Échec d\'ouverture des détails de la note';
 	@override String get failed_deleting_folder => 'Échec de suppression de dossier';
+	@override String get failed_deleting_note => 'Échec de suppression de la note';
 }
 
 // Path: pages.home.delete_folder_dialog
@@ -205,6 +209,17 @@ class _Translations$pages$home$delete_folder_dialog$fr implements Translations$p
 	// Translations
 	@override String get title => 'Supprimer le dossier ?';
 	@override String message({required Object name}) => 'Voulez-vous supprimer le dossier ${name} ?';
+}
+
+// Path: pages.home.delete_note_dialog
+class _Translations$pages$home$delete_note_dialog$fr implements Translations$pages$home$delete_note_dialog$en {
+	_Translations$pages$home$delete_note_dialog$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Supprimer la note ?';
+	@override String message({required Object name}) => 'Voulez-vous supprimer la note ${name} ?';
 }
 
 // Path: pages.home.create_folder_dialog
@@ -261,6 +276,28 @@ class _Translations$pages$home$rename_folder_dialog$fr implements Translations$p
 	@override String get name_placeholder => 'Nouveau nom';
 }
 
+// Path: pages.home.rename_note_dialog
+class _Translations$pages$home$rename_note_dialog$fr implements Translations$pages$home$rename_note_dialog$en {
+	_Translations$pages$home$rename_note_dialog$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required Object oldFileName}) => 'Renommer la note (${oldFileName})';
+	@override String get name_placeholder => 'Nouveau nom';
+}
+
+// Path: pages.home.rename_note_errors
+class _Translations$pages$home$rename_note_errors$fr implements Translations$pages$home$rename_note_errors$en {
+	_Translations$pages$home$rename_note_errors$fr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get already_exists => 'La note existe déjà';
+	@override String get modification_error => 'Échec de la modification de la note';
+}
+
 // Path: pages.home.new_filename_dialog
 class _Translations$pages$home$new_filename_dialog$fr implements Translations$pages$home$new_filename_dialog$en {
 	_Translations$pages$home$new_filename_dialog$fr._(this._root);
@@ -312,8 +349,11 @@ extension on TranslationsFr {
 			'pages.home.misc_errors.failed_opening_note' => 'Échec d\'ouverture de la note',
 			'pages.home.misc_errors.failed_opening_note_details' => 'Échec d\'ouverture des détails de la note',
 			'pages.home.misc_errors.failed_deleting_folder' => 'Échec de suppression de dossier',
+			'pages.home.misc_errors.failed_deleting_note' => 'Échec de suppression de la note',
 			'pages.home.delete_folder_dialog.title' => 'Supprimer le dossier ?',
 			'pages.home.delete_folder_dialog.message' => ({required Object name}) => 'Voulez-vous supprimer le dossier ${name} ?',
+			'pages.home.delete_note_dialog.title' => 'Supprimer la note ?',
+			'pages.home.delete_note_dialog.message' => ({required Object name}) => 'Voulez-vous supprimer la note ${name} ?',
 			'pages.home.create_folder_dialog.title' => 'Créér un dossier',
 			'pages.home.create_folder_dialog.placeholder' => 'Nom',
 			'pages.home.rename_folder_errors.already_exists' => 'Le dossier existe déjà',
@@ -323,6 +363,10 @@ extension on TranslationsFr {
 			'pages.home.create_note_errors.failed_creating_note' => 'Échec de la création de la note',
 			'pages.home.rename_folder_dialog.title' => ({required Object oldFolderName}) => 'Renommer le dossier (${oldFolderName})',
 			'pages.home.rename_folder_dialog.name_placeholder' => 'Nouveau nom',
+			'pages.home.rename_note_dialog.title' => ({required Object oldFileName}) => 'Renommer la note (${oldFileName})',
+			'pages.home.rename_note_dialog.name_placeholder' => 'Nouveau nom',
+			'pages.home.rename_note_errors.already_exists' => 'La note existe déjà',
+			'pages.home.rename_note_errors.modification_error' => 'Échec de la modification de la note',
 			'pages.home.new_filename_dialog.title' => 'Créer une nouvelle note',
 			'pages.home.new_filename_dialog.placeholder' => 'Nom',
 			'pages.note_editor.title' => 'Éditeur de note',

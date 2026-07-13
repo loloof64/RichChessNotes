@@ -114,11 +114,14 @@ class _Translations$pages$home$es implements Translations$pages$home$en {
 	@override late final _Translations$pages$home$misc$es misc = _Translations$pages$home$misc$es._(_root);
 	@override late final _Translations$pages$home$misc_errors$es misc_errors = _Translations$pages$home$misc_errors$es._(_root);
 	@override late final _Translations$pages$home$delete_folder_dialog$es delete_folder_dialog = _Translations$pages$home$delete_folder_dialog$es._(_root);
+	@override late final _Translations$pages$home$delete_note_dialog$es delete_note_dialog = _Translations$pages$home$delete_note_dialog$es._(_root);
 	@override late final _Translations$pages$home$create_folder_dialog$es create_folder_dialog = _Translations$pages$home$create_folder_dialog$es._(_root);
 	@override late final _Translations$pages$home$rename_folder_errors$es rename_folder_errors = _Translations$pages$home$rename_folder_errors$es._(_root);
 	@override late final _Translations$pages$home$create_folder_errors$es create_folder_errors = _Translations$pages$home$create_folder_errors$es._(_root);
 	@override late final _Translations$pages$home$create_note_errors$es create_note_errors = _Translations$pages$home$create_note_errors$es._(_root);
 	@override late final _Translations$pages$home$rename_folder_dialog$es rename_folder_dialog = _Translations$pages$home$rename_folder_dialog$es._(_root);
+	@override late final _Translations$pages$home$rename_note_dialog$es rename_note_dialog = _Translations$pages$home$rename_note_dialog$es._(_root);
+	@override late final _Translations$pages$home$rename_note_errors$es rename_note_errors = _Translations$pages$home$rename_note_errors$es._(_root);
 	@override late final _Translations$pages$home$new_filename_dialog$es new_filename_dialog = _Translations$pages$home$new_filename_dialog$es._(_root);
 }
 
@@ -194,6 +197,7 @@ class _Translations$pages$home$misc_errors$es implements Translations$pages$home
 	@override String get failed_opening_note => 'No se pudo abrir la nota';
 	@override String get failed_opening_note_details => 'No se pudieron abrir los detalles de la nota';
 	@override String get failed_deleting_folder => 'No se pudo eliminar la carpeta';
+	@override String get failed_deleting_note => 'No se pudo eliminar la nota';
 }
 
 // Path: pages.home.delete_folder_dialog
@@ -205,6 +209,17 @@ class _Translations$pages$home$delete_folder_dialog$es implements Translations$p
 	// Translations
 	@override String get title => '¿Eliminar carpeta?';
 	@override String message({required Object name}) => '¿Deseas eliminar la carpeta ${name}?';
+}
+
+// Path: pages.home.delete_note_dialog
+class _Translations$pages$home$delete_note_dialog$es implements Translations$pages$home$delete_note_dialog$en {
+	_Translations$pages$home$delete_note_dialog$es._(this._root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '¿Eliminar nota?';
+	@override String message({required Object name}) => '¿Deseas eliminar la nota ${name}?';
 }
 
 // Path: pages.home.create_folder_dialog
@@ -261,6 +276,28 @@ class _Translations$pages$home$rename_folder_dialog$es implements Translations$p
 	@override String get name_placeholder => 'Nuevo nombre';
 }
 
+// Path: pages.home.rename_note_dialog
+class _Translations$pages$home$rename_note_dialog$es implements Translations$pages$home$rename_note_dialog$en {
+	_Translations$pages$home$rename_note_dialog$es._(this._root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required Object oldFileName}) => 'Renombrar nota (${oldFileName})';
+	@override String get name_placeholder => 'Nuevo nombre';
+}
+
+// Path: pages.home.rename_note_errors
+class _Translations$pages$home$rename_note_errors$es implements Translations$pages$home$rename_note_errors$en {
+	_Translations$pages$home$rename_note_errors$es._(this._root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get already_exists => 'La nota ya existe';
+	@override String get modification_error => 'No se pudo modificar la nota';
+}
+
 // Path: pages.home.new_filename_dialog
 class _Translations$pages$home$new_filename_dialog$es implements Translations$pages$home$new_filename_dialog$en {
 	_Translations$pages$home$new_filename_dialog$es._(this._root);
@@ -312,8 +349,11 @@ extension on TranslationsEs {
 			'pages.home.misc_errors.failed_opening_note' => 'No se pudo abrir la nota',
 			'pages.home.misc_errors.failed_opening_note_details' => 'No se pudieron abrir los detalles de la nota',
 			'pages.home.misc_errors.failed_deleting_folder' => 'No se pudo eliminar la carpeta',
+			'pages.home.misc_errors.failed_deleting_note' => 'No se pudo eliminar la nota',
 			'pages.home.delete_folder_dialog.title' => '¿Eliminar carpeta?',
 			'pages.home.delete_folder_dialog.message' => ({required Object name}) => '¿Deseas eliminar la carpeta ${name}?',
+			'pages.home.delete_note_dialog.title' => '¿Eliminar nota?',
+			'pages.home.delete_note_dialog.message' => ({required Object name}) => '¿Deseas eliminar la nota ${name}?',
 			'pages.home.create_folder_dialog.title' => 'Crear nueva carpeta',
 			'pages.home.create_folder_dialog.placeholder' => 'Nombre',
 			'pages.home.rename_folder_errors.already_exists' => 'La carpeta ya existe',
@@ -323,6 +363,10 @@ extension on TranslationsEs {
 			'pages.home.create_note_errors.failed_creating_note' => 'No se pudo crear la nota',
 			'pages.home.rename_folder_dialog.title' => ({required Object oldFolderName}) => 'Renombrar carpeta (${oldFolderName})',
 			'pages.home.rename_folder_dialog.name_placeholder' => 'Nuevo nombre',
+			'pages.home.rename_note_dialog.title' => ({required Object oldFileName}) => 'Renombrar nota (${oldFileName})',
+			'pages.home.rename_note_dialog.name_placeholder' => 'Nuevo nombre',
+			'pages.home.rename_note_errors.already_exists' => 'La nota ya existe',
+			'pages.home.rename_note_errors.modification_error' => 'No se pudo modificar la nota',
 			'pages.home.new_filename_dialog.title' => 'Crear nueva nota',
 			'pages.home.new_filename_dialog.placeholder' => 'Nombre',
 			'pages.note_editor.title' => 'Editor de notas',

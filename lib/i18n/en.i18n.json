@@ -32,11 +32,16 @@
         "failed_opening_folder": "Failed to open folder",
         "failed_opening_note": "Failed to open note",
         "failed_opening_note_details": "Failed to open note details",
-        "failed_deleting_folder": "Failed to delete folder"
+        "failed_deleting_folder": "Failed to delete folder",
+        "failed_deleting_note": "Failed to delete note"
       },
       "delete_folder_dialog": {
         "title": "Delete folder ?",
         "message": "Do you want to delete folder $name ?"
+      },
+      "delete_note_dialog": {
+        "title": "Delete note ?",
+        "message": "Do you want to delete note $name ?"
       },
       "create_folder_dialog": {
         "title": "Create new folder",
@@ -56,6 +61,14 @@
       "rename_folder_dialog": {
         "title": "Rename folder ($oldFolderName)",
         "name_placeholder": "New name"
+      },
+      "rename_note_dialog": {
+        "title": "Rename note ($oldFileName)",
+        "name_placeholder": "New name"
+      },
+      "rename_note_errors": {
+        "already_exists": "Note already exists",
+        "modification_error": "Failed to modify note"
       },
       "new_filename_dialog": {
         "title": "Create new note",

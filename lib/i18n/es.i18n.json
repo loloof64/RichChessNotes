@@ -32,11 +32,16 @@
         "failed_opening_folder": "No se pudo abrir la carpeta",
         "failed_opening_note": "No se pudo abrir la nota",
         "failed_opening_note_details": "No se pudieron abrir los detalles de la nota",
-        "failed_deleting_folder": "No se pudo eliminar la carpeta"
+        "failed_deleting_folder": "No se pudo eliminar la carpeta",
+        "failed_deleting_note": "No se pudo eliminar la nota"
       },
       "delete_folder_dialog": {
         "title": "¿Eliminar carpeta?",
         "message": "¿Deseas eliminar la carpeta $name?"
+      },
+      "delete_note_dialog": {
+        "title": "¿Eliminar nota?",
+        "message": "¿Deseas eliminar la nota $name?"
       },
       "create_folder_dialog": {
         "title": "Crear nueva carpeta",
@@ -56,6 +61,14 @@
       "rename_folder_dialog": {
         "title": "Renombrar carpeta ($oldFolderName)",
         "name_placeholder": "Nuevo nombre"
+      },
+      "rename_note_dialog": {
+        "title": "Renombrar nota ($oldFileName)",
+        "name_placeholder": "Nuevo nombre"
+      },
+      "rename_note_errors": {
+        "already_exists": "La nota ya existe",
+        "modification_error": "No se pudo modificar la nota"
       },
       "new_filename_dialog": {
         "title": "Crear nueva nota",
